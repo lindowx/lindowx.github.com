@@ -1,3 +1,13 @@
+var showSearchPanel = function ($ele) {
+    $ele.show();
+    $('.prince-container').hide();
+};
+
+var hideSearchPanel = function ($ele) {
+    $ele.hide();
+    $('.prince-container').show();
+};
+
 var searchFunc = function(path, search_id, content_id) {
     'use strict';
     $.ajax({
@@ -13,6 +23,7 @@ var searchFunc = function(path, search_id, content_id) {
                 };
             }).get();
 
+            var match_cnt = 0;
             var $input = document.getElementById(search_id);
 			if (!$input) return;
             var $resultContent = document.getElementById(content_id);
@@ -22,8 +33,11 @@ var searchFunc = function(path, search_id, content_id) {
                     var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
                     $resultContent.innerHTML = "";
                     if (this.value.trim().length <= 0) {
+                        hideSearchPanel($($resultContent).parent().parent());
                         return;
                     }
+                    showSearchPanel($($resultContent).parent().parent());
+
                     // perform local searching
                     datas.forEach(function (data) {
                         var isMatch = true;
@@ -58,9 +72,19 @@ var searchFunc = function(path, search_id, content_id) {
                         } else {
                             isMatch = false;
                         }
+                        
                         // show search results
                         if (isMatch) {
+                            match_cnt ++;
+                            if (index_title >= 0) {
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regSTitle = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regSTitle, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+                            }
                             str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            
                             var content = data.content.trim().replace(/<[^>]+>/g, "");
                             if (first_occur >= 0) {
                                 // cut out 100 characters

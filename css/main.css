@@ -345,6 +345,9 @@ pre .javascript .function {
 
 /*  3. NAVIGATION
 /*-----------------------------------------------------------------------------------*/
+.page-navigation.shadow {
+  box-shadow: 0 2px 8px rgba(204, 204, 204, 0.5);
+}
 
 .nav-container {
   width: 92%;
@@ -389,6 +392,51 @@ h1.prince-log a {
   display: none;
 }
 
+.search-box {
+  position: relative;
+  width: 300px;
+  float: left;
+  margin: 13px 15px;
+  padding: 9px 10px;
+  z-index: 999;
+}
+.search-box input {
+  border-radius: 34px;
+}
+.search-keyword {
+  background:#ddd;
+  font-weight: bold;
+  padding: 3px;
+}
+.search-result-panel {
+  display:none;
+  position: absolute;
+  width:100%;
+  min-height: 100%;
+  left:0;
+  top:0;
+  background:#fff;
+  z-index: 998;
+}
+.search-result-wrapper {
+  width: 100%;
+  min-height:50%;
+  max-width: 1200px;
+  margin:110px auto 10px auto;
+}
+.search-result-info {
+  padding: 15px 0;
+  font-weight:bold;
+  color:#666;
+}
+.search-result {
+  color:#666;
+}
+.search-result-title {
+  text-decoration: underline !important;
+  font-size: 1.3em !important;
+}
+
 @media only screen and (min-width: 768px) {
   ul.main-nav-items {
     float: right;
@@ -402,8 +450,8 @@ h1.prince-log a {
   }
   .main-nav-items li a {
     font-family: 'Oswald', sans-serif, 'Microsoft YaHei', STHeiti;
-    font-size: 12px;
-    font-weight: 400;
+    font-size: 1.2em;
+    font-weight: bold;
     letter-spacing: 1px;
     color: #808080;
     line-height: 80px;
@@ -417,6 +465,9 @@ h1.prince-log a {
 }
 
 @media only screen and (max-width: 767px) {
+  .search-box {
+    float:none;
+  }
   ul.main-nav-items {
     margin: 10px auto;
     width: 92%;

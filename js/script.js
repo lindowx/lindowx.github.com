@@ -90,4 +90,24 @@
   }, a(function () {
     a("[data-gist-id]").gist()
   })
+
+  searchFunc('/search.xml', 'local-search-input', 'local-search-result')
+  $(document).on('keyup', function (e) {
+    //ESC
+    if (e.keyCode == 27) {
+        hideSearchPanel($('#local-search-result').parent().parent());
+        $('#local-search-input').val('');
+    }
+  });
+
+  var $nav = $('.page-navigation');
+  var setNavShasow = function () {
+    if (window.pageYOffset > $nav.height()) {
+      $nav.addClass('shadow');
+    } else {
+      $nav.removeClass('shadow');
+    }
+  };
+  $(document).on('scroll', setNavShasow);
+  setNavShasow();
 })(jQuery);
